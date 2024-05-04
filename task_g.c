@@ -7,7 +7,7 @@ int main(void) {
     // Your code below here
     FILE *file = fopen("number.txt", "r");
     if (!file) {
-        printf("Error!\n");
+        printf("Error!");
         return 1;
     }
 
