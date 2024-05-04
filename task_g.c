@@ -3,8 +3,6 @@
 #include "task_g.h"
 
 int main(void) {
-
-    // Your code below here
     FILE *file = fopen("number.txt", "r");
     if (!file) {
         printf("Error!");
@@ -13,7 +11,7 @@ int main(void) {
 
     double numbers[20];
     int count = 0;
-    
+
     // Read 20 numbers from the file
     while (count < 20 && fscanf(file, "%lf", &numbers[count]) == 1) {
         count++;
@@ -34,9 +32,6 @@ int main(void) {
     } else {
         printf("%.2f\n", max);
     }
-    
-	
-
 
     return 0;
 }
