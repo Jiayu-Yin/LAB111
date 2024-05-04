@@ -20,14 +20,14 @@ int main(void) {
     int found = 0;  // Flag to indicate if a match was found
     for (int i = 0; i < total_domains; i++) {
         if (strcmp(user_input, country_codes[i].domain) == 0) {
-            printf("This is the domain for: %s\n", country_codes[i].country);
+            printf("This is the domain for: %s", country_codes[i].country);
             found = 1;
             break;
         }
     }
 
     if (!found) {
-        printf("Domain not found.\n");
+        printf("Domain not found.");
     }
     // Do not edit below here
     return 0;
