@@ -18,7 +18,7 @@ int main(void) {
     time_t t = time(NULL);
     struct tm *tm = localtime(&t);
     char dateStr[20];  // Ensure the buffer is large enough
-    strftime(dateStr, sizeof(dateStr), "%b %d %Y", tm);  // Format date
+    strftime(dateStr, sizeof(dateStr), "%b %-2d %Y", tm);  // Format date
 
     // Print the text
     fprintf(fptr, "Hello. My email address is:\n");
