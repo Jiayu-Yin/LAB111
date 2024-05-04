@@ -4,7 +4,7 @@
 int main(int argc, char *argv[]) {
     // Check if the number of command-line arguments is not equal to 2
     if (argc != 2) {
-        printf("Error. Expected 1 filename.\n");
+        printf("Error. Expected 1 filename.");
         return 1;
     }
 
@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 
     // Check if the file was successfully opened
     if (fptr == NULL) {
-        printf("Error. Cannot open requested file.\n");
+        printf("Error. Cannot open requested file.");
         return 1;
     }
 
