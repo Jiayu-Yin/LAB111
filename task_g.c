@@ -3,7 +3,7 @@
 #include "task_g.h"
 
 int main(void) {
-    FILE *file = fopen("number.txt", "r");
+    FILE *file = fopen("numbers.txt", "r");
     if (!file) {
         printf("Error!");
         return 1;
