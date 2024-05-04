@@ -15,6 +15,11 @@ int main(void) {
     
 	
     // Enter your code under here
+
+    if (user_input[0] != '.') {
+        printf("Error! The first character entered should be a .");
+        return 1; // Exit the program
+    }
     // Use strcmp(user_input, country_codes[0].domain) to compare the text in user_input to the text in country_codes[0].domain.
     int total_domains = sizeof(country_codes) / sizeof(country_codes[0]);
     int found = 0;  // Flag to indicate if a match was found
