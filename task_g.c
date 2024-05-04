@@ -30,7 +30,7 @@ int main(void) {
     if (max == -1) {  // If no valid number was found
         printf("Error!");
     } else {
-        printf("%.2f\n", max);
+        printf("%.2f", max);
     }
 
     return 0;
