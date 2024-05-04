@@ -4,17 +4,19 @@
 
 int main(void) {
 
+    // Define constants
+    #define N 201  // Maximum number of rows in the data array
+    #define M 3    // Number of columns in the data array
+    #define MAXCHAR 100  // Maximum number of characters in a line of the input file
 
-    #define N 201
-    #define M 3
-    double data[N][M];
+    // Declare variables
+    double data[N][M];  // Array to store the data read from the file
+    char buffer[MAXCHAR];  // Buffer to store each line of the input file
+    int row = 0;  // Counter for the current row being read
+    int column = 0;  // Counter for the current column being read
+    char *ptr;  // Pointer for the strtod function
 
-    #define MAXCHAR 100
-    char buffer[MAXCHAR];
-    int row = 0;
-    int column = 0;
-    char *ptr;
-
+    // Open the input file
     char fn[] = "data.csv";
     FILE *fptr;
     fptr = fopen(fn, "r");
@@ -22,22 +24,23 @@ int main(void) {
         printf("Error! Could not open file");
         return EXIT_FAILURE; // Exit if file not found
     }
+    
     while (fgets(buffer, MAXCHAR, fptr)) {
         column = 0;
         row++;
         if (row == 1) {
-            continue;
+            continue;  // Skip the header row
         }
         char* value = strtok(buffer, ", ");
         while (value) {  
-            data[row-2][column] = strtod(value,&ptr);
+            data[row-2][column] = strtod(value,&ptr);  // Convert string to double and store in data array
             value = strtok(NULL, ", ");
             column++;
         }
     }
-    fclose(fptr);
-    fptr = NULL;
+    fclose(fptr);  // Close the input file
 
+    // Sort the data and calculate the median for each column
     double median[M];
     for (int j = 0; j < M; j++) {
         for (int i = 0; i < N; i++) {
@@ -49,14 +52,11 @@ int main(void) {
                 }
             }
         }    
-        median[j] = data[N/2][j];// Calculate median
+        median[j] = data[N/2][j];  // Calculate median
     }
 
-    // Print the result
+    // Print the median values
     printf("%.2f,%.2f,%.2f", median[0], median[1], median[2]);
-
-
-
 
     return EXIT_SUCCESS;
 }
