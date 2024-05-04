@@ -22,7 +22,7 @@ int main(void) {
 
     // Check if we read less than 20 numbers
     if (count < 20) {
-        printf("Error!\n");
+        printf("Error!");
         return 1;
     }
 
@@ -30,7 +30,7 @@ int main(void) {
     find_max_less_than_10(numbers, count, &max);
 
     if (max == -1) {  // If no valid number was found
-        printf("Error!\n");
+        printf("Error!");
     } else {
         printf("%.2f\n", max);
     }
