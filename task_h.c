@@ -10,10 +10,14 @@ int main(void) {
     int i = 0; // counter for how many characters read
     printf("Enter a file name: ");
     while ((ch = getchar()) != '\n') { // get one character at a time
-        filename[i++] = ch;
-        // Enter your code under here
-
         
+        // Enter your code under here
+        if (i >= N) { // Check if the filename exceeds 256 characters
+            printf("Error!");
+            return EXIT_FAILURE;
+        
+    }
+    filename[i++] = ch;
     }
     for (; i < N+1; i++) { // fill the rest of the array with null characters
         filename[i] = '\0';
