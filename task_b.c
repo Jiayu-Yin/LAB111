@@ -9,6 +9,7 @@ int main(void){
 	
 	
 	// Your code below here
+    height = fabs(height); // Using fabs to get the absolute value of height
 	double radius = 2.2; // Define radius
 	volume = M_PI * pow(radius, 2) * height; // Calculate the volume
 	
