@@ -10,27 +10,28 @@
 #define NUMSTEP  10   // number of steps in each walk
 
 struct Cell {
-    char symbol;
-    double probability;
-    double mean_value;
-    double std_value;
+    char symbol;// Symbol representing the terrain type
+    double probability;// Probability of successfully escaping from the cell
+    double mean_value;// Mean path length from the cell
+    double std_value;// Standard deviation of path length from the cell
 };
-const char* AllSymbol = "WBDVL";
+const char* AllSymbol = "WBDVL";// All legal symbols representing terrain types
 
 void ERROR(FILE* fp) {
     fclose(fp);
-    printf("Error!");
+    printf("Error!");// Check file opening errors
     exit(1);
 }
 
 void load_map(struct Cell cells[NUMROWS][NUMCOLS]) {
     FILE* file = NULL;
     char symbol;
-    file = fopen("island_map.txt", "rt");
+    file = fopen("island_map.txt", "rt");// Load the map from file
     if (file == NULL) {
         ERROR(NULL);
         return;
     }
+    // Read symbols from file
     for (int row = 0; row < NUMROWS; row++) {
         for (int col = 0; col < NUMCOLS; col++) {
             if (fscanf(file, "%c ", &symbol) != 1) {
@@ -56,7 +57,7 @@ void load_map(struct Cell cells[NUMROWS][NUMCOLS]) {
         }
     }
     fclose(file);
-    printf("Map:\n");
+    printf("Map:\n");// Print loaded map
     for (int row = 0; row < NUMROWS; row++) {
         for (int col = 0; col < NUMCOLS; col++) {
             printf("%c%c", cells[row][col].symbol, " \n"[(col == NUMCOLS - 1)]);
@@ -64,7 +65,7 @@ void load_map(struct Cell cells[NUMROWS][NUMCOLS]) {
     }
 }
 
-int random_step(struct Cell cells[NUMROWS][NUMCOLS], int row, int col) {
+int random_step(struct Cell cells[NUMROWS][NUMCOLS], int row, int col) {// Function to perform a random step in the walk
     int try_cnt = 0;
     while (try_cnt <= NUMSTEP) {
         if (cells[row][col].symbol == 'B') {
@@ -102,7 +103,7 @@ int random_step(struct Cell cells[NUMROWS][NUMCOLS], int row, int col) {
     return -1;
 }
 
-void display_results(struct Cell cells[NUMROWS][NUMCOLS]) {
+void display_results(struct Cell cells[NUMROWS][NUMCOLS]) { // Print out result in different situation
     printf("\nProbability of escape:\n");
     for (int row = 0; row < NUMROWS; row++) {
         for (int col = 0; col < NUMCOLS; col++) {
@@ -125,8 +126,8 @@ void display_results(struct Cell cells[NUMROWS][NUMCOLS]) {
 }
 
 int main(void) {
-    srand(123456);
-    struct Cell cells[NUMROWS][NUMCOLS] = { 0 };
+    srand(123456);// Random number generation
+    struct Cell cells[NUMROWS][NUMCOLS] = { 0 }; // Initialize map cells
     load_map(cells);
 
     // Perform random walks and calculate results
@@ -145,13 +146,13 @@ int main(void) {
                 success_cnt++;
                 all_steps += steps;
             }
-            cells[row][col].probability = 100.0 * success_cnt / NUMWALKS;
+            cells[row][col].probability = 100.0 * success_cnt / NUMWALKS;// Calculate the probability
             if (success_cnt > 0) {
                 cells[row][col].mean_value = all_steps / success_cnt;
                 for (int n = 0; n < success_cnt; n++) {
                     std_value += (steps_array[n] - cells[row][col].mean_value) * (steps_array[n] - cells[row][col].mean_value);
                 }
-                std_value = sqrt(std_value / success_cnt);
+                std_value = sqrt(std_value / success_cnt);// Calculate the SD value 
                 cells[row][col].std_value = std_value;
             }
             else {
